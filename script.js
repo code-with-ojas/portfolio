@@ -1,144 +1,162 @@
-// --- Contact Form Handling (Using FormSubmit) ---
+// =================== CONTACT FORM (FormSubmit) ===================
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
         e.preventDefault();
         
         const btn = e.target.querySelector('button');
         const span = btn.querySelector('span');
-        const originalText = span.innerText;
+        const originalHTML = span.innerHTML;
         
-        span.innerText = 'Sending...';
+        span.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Sending...';
         btn.disabled = true;
 
         const formData = new FormData(contactForm);
 
-        // Replace email below if needed
         fetch("https://formsubmit.co/ajax/abhinavanand9996@gmail.com", {
             method: "POST",
             body: formData
         })
         .then(response => response.json())
-        .then(data => {
+        .then(() => {
             alert('Message sent successfully! I will get back to you soon.');
             contactForm.reset();
-            span.innerText = originalText;
+            span.innerHTML = originalHTML;
             btn.disabled = false;
         })
         .catch(error => {
-            alert('Something went wrong. Please try again.');
             console.error('Error:', error);
-            span.innerText = originalText;
+            alert('Something went wrong. Please try again.');
+            span.innerHTML = originalHTML;
             btn.disabled = false;
         });
     });
 }
 
-// --- Custom Cursor ---
+// =================== CUSTOM CURSOR ===================
 (() => {
     const cursorDot = document.getElementById('cursor-dot');
     const cursorOutline = document.getElementById('cursor-outline');
 
-    if (cursorDot && cursorOutline) {
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
+    if (!cursorDot || !cursorOutline) return;
+    
+    window.addEventListener('mousemove', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
 
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
+        cursorDot.style.left = `${x}px`;
+        cursorDot.style.top = `${y}px`;
 
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
-    }
+        cursorOutline.animate(
+            { left: `${x - 15}px`, top: `${y - 15}px` },
+            { duration: 260, fill: "forwards" }
+        );
+    });
+
+    window.addEventListener('mousedown', () => {
+        cursorOutline.style.transform = 'scale(0.8)';
+    });
+    window.addEventListener('mouseup', () => {
+        cursorOutline.style.transform = 'scale(1)';
+    });
 })();
 
-// --- Typewriter Effect ---
+// =================== TYPEWRITER EFFECT ===================
 (() => {
-    const roles = ["Web Developer", "UI/UX Designer", "AI/ML Engineer", " Software Developer"];
+    const roles = [
+        "Web Developer",
+        "UI/UX Designer",
+        "AI/ML Engineer",
+        "Software Developer"
+    ];
     let roleIndex = 0;
     let charIndex = 0;
     let isDeleting = false;
-    const typeSpeed = 100;
-    const deleteSpeed = 50;
-    const pauseTime = 2000;
+
+    const typeSpeed = 90;
+    const deleteSpeed = 45;
+    const pauseTime = 1800;
 
     function typeWriter() {
         const element = document.getElementById('typewriter');
         if (!element) return;
 
         const currentRole = roles[roleIndex];
-        
+
         if (isDeleting) {
-            element.innerText = currentRole.substring(0, charIndex - 1);
+            element.textContent = currentRole.substring(0, charIndex - 1);
             charIndex--;
         } else {
-            element.innerText = currentRole.substring(0, charIndex + 1);
+            element.textContent = currentRole.substring(0, charIndex + 1);
             charIndex++;
         }
 
-        let typeDelay = isDeleting ? deleteSpeed : typeSpeed;
+        let delay = isDeleting ? deleteSpeed : typeSpeed;
 
         if (!isDeleting && charIndex === currentRole.length) {
             isDeleting = true;
-            typeDelay = pauseTime;
+            delay = pauseTime;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             roleIndex = (roleIndex + 1) % roles.length;
-            typeDelay = 500;
+            delay = 500;
         }
 
-        setTimeout(typeWriter, typeDelay);
+        setTimeout(typeWriter, delay);
     }
 
     document.addEventListener('DOMContentLoaded', typeWriter);
 })();
 
-// --- Scroll Reveal Animation ---
+// =================== SCROLL REVEAL ===================
 (() => {
     const revealElements = document.querySelectorAll('.reveal');
     
     const revealOnScroll = () => {
         const windowHeight = window.innerHeight;
-        const elementVisible = 100;
+        const visibleOffset = 120;
 
-        revealElements.forEach((reveal) => {
-            const elementTop = reveal.getBoundingClientRect().top;
-            if (elementTop < windowHeight - elementVisible) {
-                reveal.classList.add('active');
+        revealElements.forEach((el) => {
+            const top = el.getBoundingClientRect().top;
+            if (top < windowHeight - visibleOffset) {
+                el.classList.add('active');
             }
         });
-    }
+    };
 
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll();
 })();
 
-// --- Mobile Menu Toggle ---
+// =================== MOBILE MENU ===================
 (() => {
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
 
-    if (btn && menu) {
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+    if (!btn || !menu) return;
+
+    btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+    });
+
+    menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            menu.classList.add('hidden');
         });
-    }
+    });
 })();
 
-// --- Neural Network Canvas Animation (Updated Colors) ---
+// =================== NEURAL NETWORK CANVAS ===================
 (() => {
     const canvas = document.getElementById('neuralCanvas');
     if (!canvas) return;
-    
+
     const ctx = canvas.getContext('2d');
     let w, h, particles;
-    const particleConfig = {
-        amount: 50, // Reduced slightly for performance
-        speed: 0.4,
+    const config = {
+        amount: 55,
+        speed: 0.45,
         size: 2,
         connectionDistance: 150
     };
@@ -150,32 +168,33 @@ if (contactForm) {
 
     class Particle {
         constructor() {
+            this.reset();
+        }
+        reset() {
             this.x = Math.random() * w;
             this.y = Math.random() * h;
-            this.vx = (Math.random() - 0.5) * particleConfig.speed;
-            this.vy = (Math.random() - 0.5) * particleConfig.speed;
+            this.vx = (Math.random() - 0.5) * config.speed;
+            this.vy = (Math.random() - 0.5) * config.speed;
         }
-
         update() {
             this.x += this.vx;
             this.y += this.vy;
 
-            if (this.x < 0 || this.x > w) this.vx *= -1;
-            if (this.y < 0 || this.y > h) this.vy *= -1;
+            if (this.x < 0 || this.x > w || this.y < 0 || this.y > h) {
+                this.reset();
+            }
         }
-
         draw() {
-            // Changed to Violet/Fuchsia
-            ctx.fillStyle = '#a855f7'; 
+            ctx.fillStyle = '#a855f7';
             ctx.beginPath();
-            ctx.arc(this.x, this.y, particleConfig.size, 0, Math.PI * 2);
+            ctx.arc(this.x, this.y, config.size, 0, Math.PI * 2);
             ctx.fill();
         }
     }
 
     function initParticles() {
         particles = [];
-        for (let i = 0; i < particleConfig.amount; i++) {
+        for (let i = 0; i < config.amount; i++) {
             particles.push(new Particle());
         }
     }
@@ -188,23 +207,25 @@ if (contactForm) {
             p.draw();
         });
 
-        particles.forEach((p1, i) => {
-            particles.slice(i + 1).forEach(p2 => {
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const p1 = particles[i];
+                const p2 = particles[j];
                 const dx = p1.x - p2.x;
                 const dy = p1.y - p2.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                if (distance < particleConfig.connectionDistance) {
-                    // Connecting lines opacity
-                    ctx.strokeStyle = `rgba(168, 85, 247, ${1 - distance / particleConfig.connectionDistance})`;
+                if (distance < config.connectionDistance) {
+                    const alpha = 1 - distance / config.connectionDistance;
+                    ctx.strokeStyle = `rgba(168, 85, 247, ${alpha * 0.9})`;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(p1.x, p1.y);
                     ctx.lineTo(p2.x, p2.y);
                     ctx.stroke();
                 }
-            });
-        });
+            }
+        }
 
         requestAnimationFrame(animate);
     }
@@ -213,7 +234,91 @@ if (contactForm) {
         resize();
         initParticles();
     });
+
     resize();
     initParticles();
     animate();
+})();
+
+// =================== SCROLL PROGRESS + NAVBAR STATE ===================
+(() => {
+    const progressBar = document.getElementById('scroll-progress');
+    const navbar = document.getElementById('navbar');
+
+    const handleScroll = () => {
+        const scrollTop = window.scrollY || window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+        if (progressBar) {
+            progressBar.style.width = `${progress}%`;
+        }
+
+        if (navbar) {
+            if (scrollTop > 40) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+})();
+
+// =================== PROJECT FILTERING ===================
+(() => {
+    const buttons = document.querySelectorAll('.project-filter');
+    const cards = document.querySelectorAll('.project-card');
+
+    if (!buttons.length || !cards.length) return;
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter');
+
+            buttons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category') || '';
+                if (filter === 'all' || category.includes(filter)) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    card.style.pointerEvents = 'auto';
+                } else {
+                    card.style.opacity = '0.15';
+                    card.style.transform = 'translateY(6px)';
+                    card.style.pointerEvents = 'none';
+                }
+            });
+        });
+    });
+})();
+
+// =================== CARD TILT EFFECT ===================
+(() => {
+    const tiltCards = document.querySelectorAll('.card-tilt');
+
+    if (!tiltCards.length) return;
+
+    tiltCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            const rotateX = (y / rect.height) * -8;
+            const rotateY = (x / rect.width) * 8;
+
+            card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            card.style.boxShadow = `0 24px 60px rgba(15, 23, 42, 0.9)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg)';
+            card.style.boxShadow = '';
+        });
+    });
 })();

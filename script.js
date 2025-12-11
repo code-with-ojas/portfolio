@@ -180,21 +180,51 @@ document.querySelectorAll('.project-filter').forEach(btn => {
     });
 })();
 
-// =================== CONTACT FORM ===================
+// =================== CONTACT FORM (NETLIFY) ===================
 const contactForm = document.getElementById('contactForm');
-if(contactForm) {
+
+if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+        e.preventDefault(); // Stop page reload
+        
         const btn = contactForm.querySelector('button');
         const originalText = btn.innerHTML;
+        
+        // 1. Show Loading Animation
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         btn.disabled = true;
-        
-        setTimeout(() => {
-            alert('Message sent! I will contact you shortly.');
+
+        // 2. Prepare Data for Netlify
+        const formData = new FormData(contactForm);
+
+        // 3. Send Data using Fetch
+        fetch('/', {
+            method: 'POST',
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            // This converts the form data into a string Netlify can read
+            body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+            // Success!
+            btn.innerHTML = '<i class="fas fa-check"></i> Sent!';
+            alert('Message sent successfully! I will contact you shortly.');
             contactForm.reset();
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-        }, 1500);
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 3000);
+        })
+        .catch((error) => {
+            // Error!
+            console.error('Form submission error:', error);
+            btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed';
+            alert('Something went wrong. Please try again.');
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 3000);
+        });
     });
 }

@@ -645,7 +645,10 @@
                     </p>
                 </div>
                 
-                <form id="contactForm" class="space-y-5 max-w-2xl mx-auto">
+                <form name="contact" method="POST" data-netlify="true" id="contactForm" class="space-y-5 max-w-2xl mx-auto">
+                    
+                    <input type="hidden" name="form-name" value="contact" />
+
                     <div class="grid md:grid-cols-2 gap-5">
                         <div class="space-y-2">
                             <label class="form-label text-violet-300">Name</label>

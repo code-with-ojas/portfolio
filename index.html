@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abhinav Anand | AI/ML • Web Dev • Design</title>
     
-    <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -29,17 +24,17 @@
                         mono: ['Space Grotesk', 'monospace'],
                     },
                     colors: {
-                        dark: '#020617',
-                        card: 'rgba(15,23,42,0.85)',
+                        dark: '#0F0518', /* Deep Violet Black */
+                        card: 'rgba(20, 10, 40, 0.6)',
                     },
                     backgroundImage: {
                         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'hero-glow': 'conic-gradient(from 90deg at 50% 50%, #000000 0%, #1e1b4b 50%, #000000 100%)',
                     },
                     animation: {
                         'blob': 'blob 10s infinite',
                         'float': 'float 6s ease-in-out infinite',
                         'pulse-soft': 'pulseSoft 2.4s infinite',
+                        'spin-slow': 'spin 12s linear infinite',
                     },
                     keyframes: {
                         blob: {
@@ -62,26 +57,34 @@
         }
     </script>
 </head>
-<body class="bg-dark text-slate-300 overflow-x-hidden relative selection:bg-fuchsia-500 selection:text-white">
+<body class="bg-dark text-slate-300 overflow-x-hidden relative selection:bg-pink-500 selection:text-white">
 
-    <!-- Grid Background -->
-    <div class="fixed inset-0 z-[-2] h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div id="preloader" class="fixed inset-0 z-[100] bg-[#0F0518] flex items-center justify-center transition-opacity duration-700">
+        <div class="relative">
+            <div class="w-24 h-24 border-t-4 border-b-4 border-violet-600 rounded-full animate-spin"></div>
+            <div class="w-24 h-24 border-r-4 border-l-4 border-orange-500 rounded-full animate-spin-slow absolute top-0 left-0"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-mono text-pink-500 font-bold text-xl animate-pulse">
+                &lt;/&gt;
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed inset-0 z-[-2] h-full w-full bg-[linear-gradient(to_right,#4c1d952e_1px,transparent_1px),linear-gradient(to_bottom,#4c1d952e_1px,transparent_1px)] bg-[size:34px_34px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
     
-    <!-- Neural Network Background -->
     <canvas id="neuralCanvas"></canvas>
 
-    <!-- Scroll Progress Bar -->
-    <div id="scroll-progress" class="fixed top-0 left-0 h-1 z-[90]"></div>
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 z-[90] bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600"></div>
 
-    <!-- Custom Cursor -->
     <div class="cursor-dot hidden md:block" id="cursor-dot"></div>
     <div class="cursor-outline hidden md:block" id="cursor-outline"></div>
 
-    <!-- Navbar -->
     <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-xl md:text-2xl font-bold font-mono text-white tracking-tighter group">
-                &lt;Abhinav<span class="text-fuchsia-500 group-hover:text-cyan-400 transition-colors">Anand</span>/&gt;
+            <a href="#home" class="text-xl md:text-2xl font-bold font-mono text-white tracking-tighter group flex items-center gap-1">
+                <span class="text-pink-500">&lt;</span>
+                Abhinav
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-violet-600">Anand</span>
+                <span class="text-pink-500">/&gt;</span>
             </a>
             
             <div class="hidden md:flex space-x-8 items-center text-xs uppercase tracking-[0.18em]">
@@ -91,25 +94,18 @@
                 <a href="#ai-lab" class="nav-link">AI Lab</a>
                 <a href="#journey" class="nav-link">Journey</a>
                 <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="px-6 py-2 rounded-full bg-white/10 border border-white/10 hover:bg-white/20 hover:border-white/30 text-white font-medium transition-all backdrop-blur-md flex items-center gap-2">
-                    <i class="fas fa-bolt text-yellow-400"></i> Hire Me
+                <a href="#contact" class="px-6 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-gradient-to-r hover:from-orange-500 hover:to-pink-600 hover:text-white hover:border-transparent text-white font-bold transition-all backdrop-blur-md flex items-center gap-2 shadow-[0_0_15px_rgba(236,72,153,0.3)]">
+                    <i class="fas fa-bolt text-yellow-300"></i> Hire Me
                 </a>
             </div>
 
             <div class="flex items-center gap-4 md:gap-6">
-                <!-- Theme toggle dummy (can expand later) -->
-                <button id="mode-toggle" class="hidden md:flex items-center justify-center w-9 h-9 rounded-full border border-white/10 text-slate-400 hover:text-white hover:border-fuchsia-400/60 transition-all">
-                    <i class="fas fa-moon text-xs"></i>
-                </button>
-
-                <!-- Mobile menu button -->
-                <button class="md:hidden text-white" id="mobile-menu-btn">
+                <button class="md:hidden text-white hover:text-pink-500 transition-colors" id="mobile-menu-btn">
                     <i class="fas fa-bars text-2xl"></i>
                 </button>
             </div>
         </div>
         
-        <!-- Mobile Menu -->
         <div class="md:hidden hidden glass absolute w-full border-t border-white/10" id="mobile-menu">
             <div class="flex flex-col p-4 space-y-3 text-sm">
                 <a href="#home" class="mobile-link">Home</a>
@@ -118,245 +114,213 @@
                 <a href="#ai-lab" class="mobile-link">AI Lab</a>
                 <a href="#journey" class="mobile-link">Journey</a>
                 <a href="#projects" class="mobile-link">Projects</a>
-                <a href="#contact" class="mobile-link text-fuchsia-400 font-bold">Hire Me</a>
+                <a href="#contact" class="mobile-link text-pink-400 font-bold border border-pink-500/30 bg-pink-500/10">Hire Me</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
     <section id="home" class="min-h-screen flex items-center justify-center pt-24 md:pt-28 relative overflow-hidden">
-        <!-- Blobs -->
         <div class="absolute top-1/4 left-1/4 w-72 md:w-96 h-72 md:h-96 bg-violet-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob"></div>
-        <div class="absolute top-1/3 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-fuchsia-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-32 left-1/2 w-72 md:w-96 h-72 md:h-96 bg-cyan-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000"></div>
+        <div class="absolute top-1/3 right-1/4 w-72 md:w-96 h-72 md:h-96 bg-orange-500/20 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/2 w-72 md:w-96 h-72 md:h-96 bg-pink-600/30 rounded-full mix-blend-screen filter blur-[100px] animate-blob animation-delay-4000"></div>
 
         <div class="text-center z-10 px-4 max-w-5xl mx-auto">
             
-            <!-- Avatar -->
             <div class="mb-8 relative inline-block group animate-float">
-                <div class="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-500 to-cyan-400 rounded-full blur-md opacity-80 group-hover:opacity-100 transition duration-500"></div>
-                <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-[3px] border-slate-900 shadow-[0_0_40px_rgba(129,140,248,0.6)] card-tilt">
+                <div class="absolute inset-0 bg-gradient-to-r from-orange-500 via-pink-500 to-violet-600 rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500 animate-spin-slow"></div>
+                <div class="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-[3px] border-black/50 shadow-[0_0_40px_rgba(236,72,153,0.5)] card-tilt">
                     <img src="ojas photo.jpeg" alt="Abhinav Anand" class="w-full h-full object-cover">
                 </div>
             </div>
 
-            <!-- Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 mb-5 reveal">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-soft"></span>
-                <p class="text-cyan-300 font-mono text-[11px] md:text-xs tracking-[0.25em] uppercase">AI/ML • Web Dev • UI/UX</p>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pink-500/30 bg-pink-500/10 mb-5 reveal shadow-[0_0_15px_rgba(236,72,153,0.2)]">
+                <span class="w-2 h-2 rounded-full bg-orange-400 animate-pulse-soft"></span>
+                <p class="text-pink-200 font-mono text-[11px] md:text-xs tracking-[0.25em] uppercase">AI/ML • Web Dev • UI/UX</p>
             </div>
             
-            <!-- Title -->
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-4 tracking-tight reveal delay-100 leading-tight">
-                Designing the <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 drop-shadow-lg">Future of Intelligent Software</span>
+                Designing the <span class="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-pink-500 to-violet-600 drop-shadow-lg">Future of Intelligent Software</span>
             </h1>
             
-            <!-- Typewriter -->
             <div class="h-8 md:h-10 mb-10 text-lg md:text-2xl font-light text-slate-400 reveal delay-200 flex justify-center items-center gap-2">
                 <span>I am a</span>
-                <span id="typewriter" class="text-white font-mono border-r-2 border-fuchsia-500 pr-1 font-bold"></span>
+                <span id="typewriter" class="text-white font-mono border-r-2 border-orange-500 pr-1 font-bold"></span>
             </div>
             
-            <!-- CTA -->
             <div class="flex flex-col md:flex-row gap-4 md:gap-5 justify-center items-center reveal delay-300">
-                <a href="#projects" class="relative px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:scale-105 transition-transform w-full md:w-auto group overflow-hidden shadow-[0_12px_40px_rgba(255,255,255,0.12)]">
+                <a href="#projects" class="relative px-8 py-3.5 rounded-full bg-white text-black font-semibold hover:scale-105 transition-transform w-full md:w-auto group overflow-hidden shadow-[0_0_20px_rgba(236,72,153,0.3)]">
                     <span class="relative z-10 flex items-center justify-center gap-2">
                         <i class="fas fa-code"></i>
                         View My Work
                     </span>
-                    <div class="absolute inset-0 bg-gradient-to-r from-violet-200 to-cyan-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div class="absolute inset-0 bg-gradient-to-r from-orange-200 to-pink-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a href="#contact" class="px-8 py-3.5 rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors w-full md:w-auto flex items-center justify-center gap-2 backdrop-blur-sm">
-                    <i class="fas fa-paper-plane text-fuchsia-400"></i> Contact Me
+                <a href="#contact" class="px-8 py-3.5 rounded-full border border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors w-full md:w-auto flex items-center justify-center gap-2 backdrop-blur-sm group">
+                    <i class="fas fa-paper-plane text-pink-400 group-hover:translate-x-1 transition-transform"></i> Contact Me
                 </a>
             </div>
 
-            <!-- Socials + stats -->
             <div class="mt-12 flex flex-col items-center gap-6 reveal delay-400">
                 <div class="flex justify-center gap-7 text-xl text-slate-500">
                     <a href="https://github.com/code-with-ojas" target="_blank" class="hover:text-white hover:scale-110 transition-all duration-300"><i class="fab fa-github"></i></a>
-                    <a href="https://www.instagram.com/cse.abhinav?igsh=MTcxdDR6N2VyMmIwMQ==" target="_blank" class="hover:text-fuchsia-500 hover:scale-110 transition-all duration-300"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.linkedin.com/in/abhinav-anand-865926300" target="_blank" class="hover:text-cyan-400 hover:scale-110 transition-all duration-300"><i class="fab fa-linkedin"></i></a>
-                    <a href="mailto:abhinavanand9996@gmail.com" class="hover:text-violet-400 hover:scale-110 transition-all duration-300"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.instagram.com/cse.abhinav?igsh=MTcxdDR6N2VyMmIwMQ==" target="_blank" class="hover:text-pink-500 hover:scale-110 transition-all duration-300"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/abhinav-anand-865926300" target="_blank" class="hover:text-blue-400 hover:scale-110 transition-all duration-300"><i class="fab fa-linkedin"></i></a>
+                    <a href="mailto:abhinavanand9996@gmail.com" class="hover:text-orange-400 hover:scale-110 transition-all duration-300"><i class="fas fa-envelope"></i></a>
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-4 text-xs uppercase tracking-[0.2em] text-slate-500">
-                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/70 border border-slate-700/60">
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-slate-700/50 text-slate-300">
                         <i class="fas fa-trophy text-yellow-400"></i> Hackathon Ready
                     </span>
-                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/70 border border-slate-700/60">
-                        <i class="fas fa-brain text-fuchsia-400"></i> AI First Mindset
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/50 border border-slate-700/50 text-slate-300">
+                        <i class="fas fa-brain text-pink-400"></i> AI First Mindset
                     </span>
                 </div>
             </div>
         </div>
 
-        <!-- Scroll indicator -->
         <div class="absolute bottom-8 animate-bounce reveal delay-500">
-            <div class="flex flex-col items-center text-slate-600 text-xs font-mono tracking-[0.25em] uppercase">
+            <div class="flex flex-col items-center text-slate-600 text-xs font-mono tracking-[0.25em] uppercase hover:text-orange-400 transition-colors cursor-pointer">
                 <span>Scroll</span>
                 <i class="fas fa-chevron-down mt-2 text-sm"></i>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
     <section id="about" class="py-20 md:py-24 relative">
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <div class="reveal">
-                    <p class="text-xs font-mono text-cyan-400 tracking-[0.25em] uppercase mb-3">About Me</p>
+                    <p class="text-xs font-mono text-orange-400 tracking-[0.25em] uppercase mb-3">About Me</p>
                     <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
                         AI/ML Engineer & <br/>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">Full Stack Developer</span>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-pink-500">Full Stack Developer</span>
                     </h2>
                     <p class="text-slate-400 text-base md:text-lg leading-relaxed mb-5">
                         I am a passionate <strong>AI/ML Engineer</strong> and <strong>Software Developer</strong> focused on building intelligent products that feel fast, intuitive, and human-centric.
                     </p>
                     <p class="text-slate-400 text-base md:text-lg leading-relaxed mb-8">
-                        From training neural networks to crafting pixel-perfect interfaces, I love connecting <span class="text-cyan-300 font-medium">complex systems</span> with <span class="text-fuchsia-300 font-medium">delightful user experiences</span>. My work combines machine learning, modern web technologies, and thoughtful design.
+                        From training neural networks to crafting pixel-perfect interfaces, I love connecting <span class="text-pink-400 font-medium">complex systems</span> with <span class="text-orange-400 font-medium">delightful user experiences</span>.
                     </p>
                     
                     <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="p-5 glass rounded-2xl border-t border-violet-500/40 hover:bg-violet-900/10 transition-colors">
-                            <h3 class="text-3xl font-bold text-white mb-1">1<span class="text-violet-500 text-2xl">+</span></h3>
+                        <div class="p-5 glass rounded-2xl border-t border-violet-500/40 hover:bg-violet-900/10 transition-colors group">
+                            <h3 class="text-3xl font-bold text-white mb-1 group-hover:text-violet-400 transition-colors">1<span class="text-orange-500 text-2xl">+</span></h3>
                             <p class="text-xs text-slate-400 uppercase tracking-[0.2em]">Year Experience</p>
                         </div>
-                        <div class="p-5 glass rounded-2xl border-t border-fuchsia-500/40 hover:bg-fuchsia-900/10 transition-colors">
-                            <h3 class="text-3xl font-bold text-white mb-1">Early</h3>
+                        <div class="p-5 glass rounded-2xl border-t border-orange-500/40 hover:bg-orange-900/10 transition-colors group">
+                            <h3 class="text-3xl font-bold text-white mb-1 group-hover:text-orange-400 transition-colors">Early</h3>
                             <p class="text-xs text-slate-400 uppercase tracking-[0.2em]">In the Journey</p>
                         </div>
                     </div>
 
                     <div class="flex flex-wrap gap-3 text-xs">
-                        <span class="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200">Deep Learning</span>
-                        <span class="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200">Full Stack Web</span>
-                        <span class="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200">UI/UX Systems</span>
-                        <span class="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200">Problem Solving</span>
+                        <span class="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200 hover:border-pink-500 transition-colors">Deep Learning</span>
+                        <span class="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200 hover:border-orange-500 transition-colors">Full Stack Web</span>
+                        <span class="px-3 py-1 rounded-full bg-slate-900/80 border border-slate-700 text-slate-200 hover:border-violet-500 transition-colors">UI/UX Systems</span>
                     </div>
                 </div>
                 
-                <!-- Code Card -->
-                <div class="relative reveal delay-200">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-2xl blur opacity-30"></div>
+                <div class="relative reveal delay-200 spotlight-card-wrapper">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-orange-500 to-pink-600 rounded-2xl blur opacity-20"></div>
                     
-                    <div class="glass relative rounded-2xl p-6 md:p-8 transform rotate-1 hover:rotate-0 transition-transform duration-500 border border-white/10 card-tilt">
+                    <div class="glass relative rounded-2xl p-6 md:p-8 transform rotate-1 hover:rotate-0 transition-transform duration-500 border border-white/10 card-tilt spotlight-card">
                         <div class="flex justify-between items-center mb-5 border-b border-white/5 pb-3">
                             <div class="flex gap-2">
                                 <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                <div class="w-3 h-3 rounded-full bg-orange-500/80"></div>
                                 <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
                             </div>
                             <div class="text-[11px] text-slate-500 font-mono">abhinav.engineer.ts</div>
                         </div>
                         <div class="font-mono text-xs md:text-sm leading-7 md:leading-8">
-                            <div class="text-fuchsia-400">class <span class="text-yellow-300">Abhinav</span> <span class="text-slate-400">extends</span> <span class="text-cyan-300">Human</span> {</div>
-                            <div class="pl-6 text-slate-500">// Core identity</div>
-                            <div class="pl-6 text-violet-300">constructor() {</div>
-                            <div class="pl-10 text-slate-300">this.name = <span class="text-green-400">"Abhinav Anand"</span>;</div>
-                            <div class="pl-10 text-slate-300">this.role = <span class="text-green-400">"AI/ML Engineer & Full Stack Dev"</span>;</div>
-                            <div class="pl-10 text-slate-300">this.location = <span class="text-green-400">"India"</span>;</div>
-                            <div class="pl-6 text-violet-300">}</div>
+                            <div class="text-pink-400">class <span class="text-orange-300">Abhinav</span> <span class="text-slate-400">extends</span> <span class="text-violet-300">Human</span> {</div>
+                            <div class="pl-6 text-slate-600">// Core identity</div>
+                            <div class="pl-6 text-pink-300">constructor() {</div>
+                            <div class="pl-10 text-slate-300">this.name = <span class="text-emerald-400">"Abhinav Anand"</span>;</div>
+                            <div class="pl-10 text-slate-300">this.role = <span class="text-emerald-400">"AI/ML Engineer"</span>;</div>
+                            <div class="pl-6 text-pink-300">}</div>
                             <br>
-                            <div class="pl-6 text-slate-500">// Primary stack</div>
-                            <div class="pl-6 text-violet-300">stack() {</div>
+                            <div class="pl-6 text-slate-600">// Primary stack</div>
+                            <div class="pl-6 text-pink-300">stack() {</div>
                             <div class="pl-10 text-slate-300">return [</div>
-                            <div class="pl-14 text-cyan-400">"Python · TensorFlow · ML"</div>
-                            <div class="pl-14 text-cyan-400">"JavaScript · Node · REST APIs"</div>
-                            <div class="pl-14 text-cyan-400">"Tailwind CSS · UI/UX Systems"</div>
+                            <div class="pl-14 text-orange-300">"Python · TensorFlow"</div>
+                            <div class="pl-14 text-orange-300">"JavaScript · React"</div>
+                            <div class="pl-14 text-orange-300">"Tailwind · Figma"</div>
                             <div class="pl-10 text-slate-300">];</div>
-                            <div class="pl-6 text-violet-300">}</div>
-                            <br>
-                            <div class="pl-6 text-slate-500">// Mission</div>
-                            <div class="pl-6 text-violet-300">build(product) {</div>
-                            <div class="pl-10 text-slate-300">return product.merge(</div>
-                            <div class="pl-14 text-cyan-400">"Beautiful UI",</div>
-                            <div class="pl-14 text-cyan-400">"Reliable Engineering",</div>
-                            <div class="pl-14 text-cyan-400">"Intelligent Automation"</div>
-                            <div class="pl-10 text-slate-300">);</div>
-                            <div class="pl-6 text-violet-300">}</div>
-                            <div class="text-fuchsia-400">}</div>
+                            <div class="pl-6 text-pink-300">}</div>
+                            <div class="text-pink-400">}</div>
                         </div>
+                        <div class="spotlight-overlay"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SKILLS -->
-    <section id="skills" class="py-20 md:py-24 bg-slate-900/30 relative overflow-hidden">
+    <section id="skills" class="py-20 md:py-24 bg-[#0a0412] relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-violet-900/10 to-transparent"></div>
         
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center mb-14 reveal">
-                <p class="text-xs font-mono text-cyan-400 tracking-[0.25em] uppercase mb-2">My Arsenal</p>
+                <p class="text-xs font-mono text-orange-400 tracking-[0.25em] uppercase mb-2">My Arsenal</p>
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-3">Technical Proficiency</h3>
                 <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
-                    A balanced mix of <span class="text-cyan-300">engineering depth</span> and <span class="text-fuchsia-300">design sensitivity</span>, focused on building AI-powered web experiences.
+                    A balanced mix of <span class="text-violet-300">engineering depth</span> and <span class="text-orange-300">design sensitivity</span>.
                 </p>
             </div>
             
             <div class="grid md:grid-cols-3 gap-7 md:gap-8">
-                <!-- Languages -->
-                <div class="group glass p-7 md:p-8 rounded-2xl border border-white/5 hover:border-fuchsia-500/60 transition-all duration-300 reveal delay-100 relative overflow-hidden card-tilt">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-fuchsia-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="group glass p-7 md:p-8 rounded-2xl border border-white/5 hover:border-violet-500/60 transition-all duration-300 reveal delay-100 relative overflow-hidden spotlight-card">
+                    <div class="spotlight-overlay"></div>
                     
-                    <div class="flex items-center gap-4 mb-7">
-                        <div class="w-11 h-11 rounded-xl bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400 text-lg border border-fuchsia-500/20 group-hover:scale-110 transition-transform">
+                    <div class="flex items-center gap-4 mb-7 relative z-10">
+                        <div class="w-11 h-11 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 text-lg border border-violet-500/20 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(139,92,246,0.2)]">
                             <i class="fas fa-terminal"></i>
                         </div>
                         <h4 class="text-lg font-bold text-white">Languages</h4>
                     </div>
-                    <div class="space-y-5 text-sm">
+                    <div class="space-y-5 text-sm relative z-10">
                         <div>
                             <div class="flex justify-between mb-1.5">
                                 <span class="text-slate-300 font-medium">Python</span>
-                                <span class="badge badge-fuchsia">Advanced</span>
+                                <span class="badge badge-violet">Advanced</span>
                             </div>
-                            <div class="skill-track">
-                                <div class="skill-fill skill-fill-fuchsia" style="width: 90%"></div>
-                            </div>
+                            <div class="skill-track"><div class="skill-fill skill-fill-violet" style="width: 90%"></div></div>
                         </div>
                         <div>
                             <div class="flex justify-between mb-1.5">
                                 <span class="text-slate-300 font-medium">JavaScript</span>
-                                <span class="badge badge-fuchsia">Advanced</span>
+                                <span class="badge badge-violet">Advanced</span>
                             </div>
-                            <div class="skill-track">
-                                <div class="skill-fill skill-fill-fuchsia" style="width: 85%"></div>
-                            </div>
+                            <div class="skill-track"><div class="skill-fill skill-fill-violet" style="width: 85%"></div></div>
                         </div>
                         <div>
                             <div class="flex justify-between mb-1.5">
                                 <span class="text-slate-300 font-medium">C++</span>
                                 <span class="badge badge-neutral">Intermediate</span>
                             </div>
-                            <div class="skill-track">
-                                <div class="skill-fill skill-fill-neutral" style="width: 60%"></div>
-                            </div>
+                            <div class="skill-track"><div class="skill-fill skill-fill-neutral" style="width: 60%"></div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Frontend & Design -->
-                <div class="group glass p-7 md:p-8 rounded-2xl border border-white/5 hover:border-cyan-500/60 transition-all duration-300 reveal delay-200 relative overflow-hidden card-tilt">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="group glass p-7 md:p-8 rounded-2xl border border-white/5 hover:border-orange-500/60 transition-all duration-300 reveal delay-200 relative overflow-hidden spotlight-card">
+                    <div class="spotlight-overlay"></div>
                     
-                    <div class="flex items-center gap-4 mb-7">
-                        <div class="w-11 h-11 rounded-xl bg-cyan-500/10 flex items-center justify-center text-cyan-400 text-lg border border-cyan-500/20 group-hover:scale-110 transition-transform">
+                    <div class="flex items-center gap-4 mb-7 relative z-10">
+                        <div class="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-400 text-lg border border-orange-500/20 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(249,115,22,0.2)]">
                             <i class="fas fa-laptop-code"></i>
                         </div>
                         <h4 class="text-lg font-bold text-white">Frontend & Design</h4>
                     </div>
-                    <div class="space-y-5 text-sm">
+                    <div class="space-y-5 text-sm relative z-10">
                         <div>
                             <div class="flex justify-between mb-1.5">
                                 <span class="text-slate-300 font-medium">Tailwind CSS</span>
-                                <span class="badge badge-cyan">Pro</span>
+                                <span class="badge badge-orange">Pro</span>
                             </div>
-                            <div class="skill-track">
-                                <div class="skill-fill skill-fill-cyan" style="width: 92%"></div>
-                            </div>
+                            <div class="skill-track"><div class="skill-fill skill-fill-orange" style="width: 92%"></div></div>
                         </div>
                         <div>
                             <div class="flex justify-between mb-1.5">
@@ -366,252 +330,201 @@
                                 <span class="badge badge-neutral">Beginner</span>
                             </div>
                             <div class="skill-track">
-                                <div class="skill-fill skill-fill-mixed" style="width: 45%"></div>
+                                <div class="skill-fill" style="width: 45%; background: linear-gradient(90deg, #f97316, #ec4899);"></div>
                             </div>
                         </div>
                         <div>
                             <div class="flex justify-between mb-1.5">
                                 <span class="text-slate-300 font-medium">HTML/CSS</span>
-                                <span class="badge badge-cyan">Pro</span>
+                                <span class="badge badge-orange">Pro</span>
                             </div>
-                            <div class="skill-track">
-                                <div class="skill-fill skill-fill-cyan" style="width: 95%"></div>
-                            </div>
+                            <div class="skill-track"><div class="skill-fill skill-fill-orange" style="width: 95%"></div></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Backend & Systems -->
-                <div class="group glass p-7 md:p-8 rounded-2xl border border-white/5 hover:border-violet-500/60 transition-all duration-300 reveal delay-300 relative overflow-hidden card-tilt">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="group glass p-7 md:p-8 rounded-2xl border border-white/5 hover:border-pink-500/60 transition-all duration-300 reveal delay-300 relative overflow-hidden spotlight-card">
+                    <div class="spotlight-overlay"></div>
                     
-                    <div class="flex items-center gap-4 mb-7">
-                        <div class="w-11 h-11 rounded-xl bg-violet-500/10 flex items-center justify-center text-violet-400 text-lg border border-violet-500/20 group-hover:scale-110 transition-transform">
+                    <div class="flex items-center gap-4 mb-7 relative z-10">
+                        <div class="w-11 h-11 rounded-xl bg-pink-500/10 flex items-center justify-center text-pink-400 text-lg border border-pink-500/20 group-hover:scale-110 transition-transform">
                             <i class="fas fa-server"></i>
                         </div>
                         <h4 class="text-lg font-bold text-white">Backend & Systems</h4>
                     </div>
-                    <div class="space-y-5 text-sm">
+                    <div class="space-y-5 text-sm relative z-10">
                         <div>
                             <div class="flex justify-between mb-1.5">
                                 <span class="text-slate-300 font-medium">Node.js</span>
                                 <span class="badge badge-neutral">Basic</span>
                             </div>
-                            <div class="skill-track">
-                                <div class="skill-fill skill-fill-neutral" style="width: 35%"></div>
-                            </div>
+                            <div class="skill-track"><div class="skill-fill skill-fill-neutral" style="width: 35%"></div></div>
                         </div>
 
-                        <div class="mt-5 p-4 bg-violet-500/5 rounded-xl border border-violet-500/15 text-[13px] leading-relaxed flex gap-3">
-                            <div class="mt-1 text-violet-300"><i class="fas fa-info-circle"></i></div>
-                            <p class="text-violet-200">
-                                Currently exploring <span class="font-semibold">scalable APIs, databases, and deployment</span> to ship AI features into reliable production-grade apps.
+                        <div class="mt-5 p-4 bg-pink-500/5 rounded-xl border border-pink-500/15 text-[13px] leading-relaxed flex gap-3">
+                            <div class="mt-1 text-pink-300"><i class="fas fa-info-circle"></i></div>
+                            <p class="text-pink-200">
+                                Currently exploring <span class="font-semibold text-white">scalable APIs</span> to ship AI features.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Small stats row -->
             <div class="mt-12 grid md:grid-cols-3 gap-5 text-sm reveal delay-400">
-                <div class="glass rounded-xl p-4 flex items-center gap-4">
-                    <div class="w-9 h-9 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Focus</p>
-                        <p class="text-slate-200">AI + Product Engineering</p>
-                    </div>
+                <div class="glass rounded-xl p-4 flex items-center gap-4 border border-white/5">
+                    <div class="w-9 h-9 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-400"><i class="fas fa-database"></i></div>
+                    <div><p class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Focus</p><p class="text-slate-200">AI + Product Engineering</p></div>
                 </div>
-                <div class="glass rounded-xl p-4 flex items-center gap-4">
-                    <div class="w-9 h-9 rounded-full bg-sky-500/10 flex items-center justify-center text-sky-400">
-                        <i class="fas fa-layer-group"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Stack</p>
-                        <p class="text-slate-200">MERN • REST • Tailwind</p>
-                    </div>
+                <div class="glass rounded-xl p-4 flex items-center gap-4 border border-white/5">
+                    <div class="w-9 h-9 rounded-full bg-sky-500/10 flex items-center justify-center text-sky-400"><i class="fas fa-layer-group"></i></div>
+                    <div><p class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Stack</p><p class="text-slate-200">MERN • REST • Tailwind</p></div>
                 </div>
-                <div class="glass rounded-xl p-4 flex items-center gap-4">
-                    <div class="w-9 h-9 rounded-full bg-fuchsia-500/10 flex items-center justify-center text-fuchsia-400">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Mindset</p>
-                        <p class="text-slate-200">Learn • Ship • Iterate</p>
-                    </div>
+                <div class="glass rounded-xl p-4 flex items-center gap-4 border border-white/5">
+                    <div class="w-9 h-9 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400"><i class="fas fa-brain"></i></div>
+                    <div><p class="text-xs uppercase tracking-[0.2em] text-slate-500 mb-1">Mindset</p><p class="text-slate-200">Learn • Ship • Iterate</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- AI LAB -->
     <section id="ai-lab" class="py-20 md:py-24 relative">
-        <div class="absolute inset-0 bg-gradient-radial from-fuchsia-700/15 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-radial from-violet-900/10 via-transparent to-transparent"></div>
 
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14 reveal">
                 <div>
-                    <p class="text-xs font-mono text-fuchsia-400 tracking-[0.25em] uppercase mb-2">AI Lab</p>
+                    <p class="text-xs font-mono text-violet-400 tracking-[0.25em] uppercase mb-2">AI Lab</p>
                     <h3 class="text-3xl md:text-4xl font-bold text-white mb-3">Intelligent Experiments</h3>
                     <p class="text-slate-400 max-w-xl text-sm md:text-base">
-                        A playground of ideas where I blend <span class="text-fuchsia-300">machine learning</span>, <span class="text-cyan-300">automation</span>, and <span class="text-violet-300">clean interfaces</span>.
+                        A playground of ideas blending <span class="text-orange-300">machine learning</span> with <span class="text-violet-300">interface design</span>.
                     </p>
-                </div>
-                <div class="text-xs md:text-sm text-slate-400">
-                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/70 border border-slate-700">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Always learning, always shipping.
-                    </span>
                 </div>
             </div>
 
             <div class="grid md:grid-cols-3 gap-7">
-                <!-- AI Study Assistant -->
-                <article class="ai-card glass rounded-2xl p-6 border border-fuchsia-500/25 hover:border-fuchsia-400/70 transition-all card-tilt reveal delay-100">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="badge badge-fuchsia-soft flex items-center gap-2">
+                <article class="ai-card glass rounded-2xl p-6 border border-violet-500/20 hover:border-orange-400/50 transition-all card-tilt reveal delay-100 spotlight-card group">
+                    <div class="spotlight-overlay"></div>
+                    <div class="flex items-center justify-between mb-4 relative z-10">
+                        <span class="badge badge-violet-soft flex items-center gap-2 group-hover:bg-orange-500/20 group-hover:text-orange-200 transition-colors">
                             <i class="fas fa-robot text-xs"></i> NLP • Chat
                         </span>
-                        <i class="fas fa-circle text-[6px] text-emerald-400"></i>
+                        <i class="fas fa-circle text-[6px] text-emerald-400 animate-pulse"></i>
                     </div>
-                    <h4 class="text-lg font-semibold text-white mb-2">AI Study Assistant</h4>
-                    <p class="text-sm text-slate-300 mb-4">
-                        A smart assistant that summarizes notes, generates quizzes, and explains topics in simple language for faster learning.
+                    <h4 class="text-lg font-semibold text-white mb-2 relative z-10">AI Study Assistant</h4>
+                    <p class="text-sm text-slate-300 mb-4 relative z-10">
+                        A smart assistant that summarizes notes and generates quizzes for faster learning.
                     </p>
-                    <ul class="text-xs text-slate-400 space-y-1 mb-4">
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Context-aware explanations</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Quiz & MCQ generation</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Topic-based flashcards</li>
-                    </ul>
-                    <div class="flex justify-between items-center text-xs text-slate-400">
-                        <span>Python • Transformers • Web UI</span>
-                        <span class="inline-flex items-center gap-1">
-                            <i class="fas fa-flask"></i> In progress
-                        </span>
+                    <div class="h-1 w-full bg-slate-800 rounded-full mb-3 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-500 to-orange-500 w-2/3"></div>
+                    </div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 relative z-10">
+                        <span>Python • Transformers</span>
+                        <span class="text-orange-300"><i class="fas fa-flask"></i> In Lab</span>
                     </div>
                 </article>
 
-                <!-- Vision-based Project -->
-                <article class="ai-card glass rounded-2xl p-6 border border-cyan-500/25 hover:border-cyan-400/70 transition-all card-tilt reveal delay-200">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="badge badge-cyan-soft flex items-center gap-2">
-                            <i class="fas fa-eye text-xs"></i> Computer Vision
+                <article class="ai-card glass rounded-2xl p-6 border border-violet-500/20 hover:border-orange-400/50 transition-all card-tilt reveal delay-200 spotlight-card group">
+                    <div class="spotlight-overlay"></div>
+                    <div class="flex items-center justify-between mb-4 relative z-10">
+                        <span class="badge badge-violet-soft flex items-center gap-2 group-hover:bg-orange-500/20 group-hover:text-orange-200 transition-colors">
+                            <i class="fas fa-eye text-xs"></i> Vision
                         </span>
-                        <i class="fas fa-circle text-[6px] text-emerald-400"></i>
+                        <i class="fas fa-circle text-[6px] text-emerald-400 animate-pulse"></i>
                     </div>
-                    <h4 class="text-lg font-semibold text-white mb-2">Smart Detection System</h4>
-                    <p class="text-sm text-slate-300 mb-4">
-                        Experimenting with real-time detection and tracking to bring meaningful insights from live visuals and streams.
+                    <h4 class="text-lg font-semibold text-white mb-2 relative z-10">Smart Detection</h4>
+                    <p class="text-sm text-slate-300 mb-4 relative z-10">
+                        Real-time object detection and tracking to gain insights from video streams.
                     </p>
-                    <ul class="text-xs text-slate-400 space-y-1 mb-4">
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Preprocessing pipelines</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Model evaluation & tuning</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Dashboard-style visualizations</li>
-                    </ul>
-                    <div class="flex justify-between items-center text-xs text-slate-400">
-                        <span>OpenCV • Python • Charts</span>
-                        <span class="inline-flex items-center gap-1">
-                            <i class="fas fa-circle-notch fa-spin text-[11px]"></i> Exploring
-                        </span>
+                    <div class="h-1 w-full bg-slate-800 rounded-full mb-3 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-500 to-orange-500 w-1/3"></div>
+                    </div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 relative z-10">
+                        <span>OpenCV • Python</span>
+                        <span class="text-orange-300"><i class="fas fa-flask"></i> Prototype</span>
                     </div>
                 </article>
 
-                <!-- Recommendation / Productivity -->
-                <article class="ai-card glass rounded-2xl p-6 border border-violet-500/25 hover:border-violet-400/70 transition-all card-tilt reveal delay-300">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="badge badge-violet-soft flex items-center gap-2">
-                            <i class="fas fa-layer-group text-xs"></i> Recommenders
+                <article class="ai-card glass rounded-2xl p-6 border border-violet-500/20 hover:border-orange-400/50 transition-all card-tilt reveal delay-300 spotlight-card group">
+                    <div class="spotlight-overlay"></div>
+                    <div class="flex items-center justify-between mb-4 relative z-10">
+                        <span class="badge badge-violet-soft flex items-center gap-2 group-hover:bg-orange-500/20 group-hover:text-orange-200 transition-colors">
+                            <i class="fas fa-layer-group text-xs"></i> Recommender
                         </span>
-                        <i class="fas fa-circle text-[6px] text-emerald-400"></i>
+                        <i class="fas fa-circle text-[6px] text-emerald-400 animate-pulse"></i>
                     </div>
-                    <h4 class="text-lg font-semibold text-white mb-2">Smart Productivity Engine</h4>
-                    <p class="text-sm text-slate-300 mb-4">
-                        A system that ranks and recommends tasks based on priority, focus levels, and deadlines for better productivity.
+                    <h4 class="text-lg font-semibold text-white mb-2 relative z-10">Productivity Engine</h4>
+                    <p class="text-sm text-slate-300 mb-4 relative z-10">
+                        Ranking tasks based on priority and focus levels for optimized workflows.
                     </p>
-                    <ul class="text-xs text-slate-400 space-y-1 mb-4">
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Priority scoring logic</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Clean, responsive dashboard</li>
-                        <li><i class="fas fa-check text-emerald-400 mr-2"></i>Space for ML integration</li>
-                    </ul>
-                    <div class="flex justify-between items-center text-xs text-slate-400">
-                        <span>Node.js • JS • UI</span>
-                        <span class="inline-flex items-center gap-1">
-                            <i class="fas fa-seedling"></i> Prototype
-                        </span>
+                    <div class="h-1 w-full bg-slate-800 rounded-full mb-3 overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-violet-500 to-orange-500 w-1/2"></div>
+                    </div>
+                    <div class="flex justify-between items-center text-xs text-slate-400 relative z-10">
+                        <span>Node.js • ML</span>
+                        <span class="text-orange-300"><i class="fas fa-flask"></i> Concept</span>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- JOURNEY / TIMELINE -->
     <section id="journey" class="py-20 md:py-24 relative">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-14 reveal">
-                <p class="text-xs font-mono text-cyan-400 tracking-[0.25em] uppercase mb-2">Journey</p>
+                <p class="text-xs font-mono text-orange-400 tracking-[0.25em] uppercase mb-2">Journey</p>
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-3">How I’m Evolving</h3>
                 <p class="text-slate-400 max-w-2xl mx-auto text-sm md:text-base">
-                    I am at the beginning of my career, but moving fast by combining <span class="text-fuchsia-300">consistent practice</span>, <span class="text-cyan-300">projects</span>, and <span class="text-violet-300">learning in public</span>.
+                    Combining <span class="text-orange-300">consistent practice</span>, <span class="text-violet-300">projects</span>, and learning in public.
                 </p>
             </div>
 
             <div class="relative reveal delay-100">
-                <div class="absolute left-1.5 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-fuchsia-500/40 via-slate-600/50 to-cyan-400/40"></div>
+                <div class="absolute left-1.5 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-violet-500/40 via-orange-500/40 to-violet-500/40"></div>
                 
                 <div class="space-y-10 md:space-y-12">
-                    <!-- Item 1 -->
-                    <div class="timeline-item md:grid md:grid-cols-2 md:gap-10 items-center">
+                    <div class="timeline-item md:grid md:grid-cols-2 md:gap-10 items-center group">
                         <div class="md:text-right md:pr-10 order-2 md:order-1">
-                            <h4 class="text-sm font-mono text-fuchsia-300 tracking-[0.2em] uppercase mb-1">2025 → Present</h4>
-                            <h3 class="text-lg md:text-xl font-semibold text-white mb-2">Diving Deep into AI & Web</h3>
-                            <p class="text-sm text-slate-300">
-                                Started combining AI/ML fundamentals with modern web development — building a strong base in data, models, and deployment.
-                            </p>
+                            <h4 class="text-sm font-mono text-violet-300 tracking-[0.2em] uppercase mb-1">2025 → Present</h4>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-2 group-hover:text-orange-400 transition-colors">Diving Deep into AI & Web</h3>
+                            <p class="text-sm text-slate-300">Combining AI/ML fundamentals with modern web development.</p>
                         </div>
                         <div class="relative mb-4 md:mb-0 order-1 md:order-2">
-                            <div class="timeline-dot bg-fuchsia-400"></div>
+                            <div class="timeline-dot bg-violet-400 ring-4 ring-violet-900/50 group-hover:ring-orange-500/50 group-hover:bg-orange-400 transition-all"></div>
                         </div>
                     </div>
 
-                    <!-- Item 2 -->
-                    <div class="timeline-item md:grid md:grid-cols-2 md:gap-10 items-center">
+                    <div class="timeline-item md:grid md:grid-cols-2 md:gap-10 items-center group">
                         <div class="relative mb-4 md:mb-0">
-                            <div class="timeline-dot bg-cyan-400"></div>
+                            <div class="timeline-dot bg-orange-400 ring-4 ring-orange-900/50 group-hover:ring-violet-500/50 group-hover:bg-violet-400 transition-all"></div>
                         </div>
                         <div class="md:pl-10">
-                            <h4 class="text-sm font-mono text-cyan-300 tracking-[0.2em] uppercase mb-1">LeetCode & Problem Solving</h4>
-                            <h3 class="text-lg md:text-xl font-semibold text-white mb-2">Building a Strong DSA Mindset</h3>
-                            <p class="text-sm text-slate-300">
-                                Solving problems to sharpen logic, complexity analysis, and structured thinking — essential for scaling both AI and backend systems.
-                            </p>
+                            <h4 class="text-sm font-mono text-orange-300 tracking-[0.2em] uppercase mb-1">LeetCode & Problem Solving</h4>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-2 group-hover:text-violet-400 transition-colors">Building a Strong DSA Mindset</h3>
+                            <p class="text-sm text-slate-300">Sharpening logic for scaling intelligent systems.</p>
                         </div>
                     </div>
 
-                    <!-- Item 3 -->
-                    <div class="timeline-item md:grid md:grid-cols-2 md:gap-10 items-center">
+                    <div class="timeline-item md:grid md:grid-cols-2 md:gap-10 items-center group">
                         <div class="md:text-right md:pr-10 order-2 md:order-1">
-                            <h4 class="text-sm font-mono text-violet-300 tracking-[0.2em] uppercase mb-1">Next Steps</h4>
-                            <h3 class="text-lg md:text-xl font-semibold text-white mb-2">Open Source & Real-World Impact</h3>
-                            <p class="text-sm text-slate-300">
-                                Planning to contribute to open-source, ship more AI-backed tools, and collaborate on products that actually help people.
-                            </p>
+                            <h4 class="text-sm font-mono text-blue-300 tracking-[0.2em] uppercase mb-1">Next Steps</h4>
+                            <h3 class="text-lg md:text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">Open Source & Real-World Impact</h3>
+                            <p class="text-sm text-slate-300">Collaborating on products that actually help people.</p>
                         </div>
                         <div class="relative mb-4 md:mb-0 order-1 md:order-2">
-                            <div class="timeline-dot bg-violet-400"></div>
+                            <div class="timeline-dot bg-blue-400 ring-4 ring-blue-900/50 group-hover:ring-white/20 transition-all"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- LeetCode Block -->
             <div class="mt-16 max-w-4xl mx-auto reveal delay-200">
-                <div class="glass p-7 md:p-8 rounded-2xl border border-yellow-500/25 bg-gradient-to-br from-yellow-500/5 to-transparent relative overflow-hidden group">
-                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-yellow-500/10 rounded-full blur-3xl group-hover:bg-yellow-500/20 transition-colors duration-700"></div>
+                <div class="glass p-7 md:p-8 rounded-2xl border border-orange-500/25 bg-gradient-to-br from-orange-500/5 to-transparent relative overflow-hidden group hover:border-orange-400/60 transition-colors">
+                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl group-hover:bg-orange-500/20 transition-colors duration-700"></div>
                     
                     <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
                         <div class="flex items-center gap-5">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-600/20 to-yellow-900/20 flex items-center justify-center text-yellow-400 text-3xl border border-yellow-500/40 shadow-[0_0_20px_rgba(234,179,8,0.25)]">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-orange-600/20 to-orange-900/20 flex items-center justify-center text-orange-400 text-3xl border border-orange-500/40 shadow-[0_0_20px_rgba(249,115,22,0.25)] group-hover:scale-110 transition-transform">
                                 <i class="fas fa-code-branch"></i>
                             </div>
                             <div>
@@ -621,14 +534,14 @@
                         </div>
                         <div class="text-center md:text-right">
                             <div class="text-4xl md:text-5xl font-bold text-white mb-1 tracking-tighter">
-                                11<span class="text-yellow-500">+</span>
+                                11<span class="text-orange-500">+</span>
                             </div>
-                            <span class="text-[10px] md:text-[11px] text-yellow-400 uppercase tracking-[0.3em] font-semibold opacity-80">
+                            <span class="text-[10px] md:text-[11px] text-orange-400 uppercase tracking-[0.3em] font-semibold opacity-80">
                                 Problems Solved
                             </span>
                         </div>
                         <div>
-                            <a href="https://leetcode.com/" target="_blank" class="inline-flex items-center gap-2 px-7 py-2.5 rounded-full bg-yellow-500/10 text-yellow-300 border border-yellow-500/40 hover:bg-yellow-400 hover:text-black font-semibold text-xs md:text-sm transition-all duration-300">
+                            <a href="https://leetcode.com/" target="_blank" class="inline-flex items-center gap-2 px-7 py-2.5 rounded-full bg-orange-500/10 text-orange-300 border border-orange-500/40 hover:bg-orange-400 hover:text-black font-semibold text-xs md:text-sm transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
                                 View Profile <i class="fas fa-external-link-alt text-[11px]"></i>
                             </a>
                         </div>
@@ -638,194 +551,133 @@
         </div>
     </section>
 
-    <!-- PROJECTS -->
     <section id="projects" class="py-20 md:py-24">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-10 reveal">
                 <div>
-                    <p class="text-xs font-mono text-fuchsia-400 tracking-[0.25em] uppercase mb-2">My Work</p>
+                    <p class="text-xs font-mono text-orange-400 tracking-[0.25em] uppercase mb-2">My Work</p>
                     <h3 class="text-3xl md:text-4xl font-bold text-white mb-3">Featured Projects</h3>
-                    <p class="text-slate-400 max-w-xl text-sm md:text-base">
-                        A mix of AI experiments, interfaces, and full-stack projects. More are being built and will be pushed live soon.
-                    </p>
                 </div>
                 <div class="flex flex-col items-start md:items-end gap-3">
                     <div class="flex flex-wrap gap-2 text-[11px] md:text-xs">
                         <button class="project-filter active" data-filter="all">All</button>
                         <button class="project-filter" data-filter="ai">AI / ML</button>
                         <button class="project-filter" data-filter="web">Web Apps</button>
-                        <button class="project-filter" data-filter="design">UI / UX</button>
                     </div>
-                    <a href="https://github.com/code-with-ojas" target="_blank" class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm md:text-base">
-                        View GitHub <i class="fas fa-arrow-right text-xs"></i>
-                    </a>
                 </div>
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7 reveal delay-100">
-                <!-- Project card 1 -->
-                <article class="project-card glass rounded-2xl p-6 border border-slate-700/60 hover:border-fuchsia-500/60 transition-all card-tilt" data-category="ai web">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="badge badge-fuchsia-soft">AI • Web</span>
-                        <span class="text-[11px] text-slate-500 flex items-center gap-1">
-                            <i class="fas fa-circle text-[6px] text-emerald-400"></i> In progress
-                        </span>
+                <article class="project-card glass rounded-2xl p-6 border border-slate-700/60 hover:border-violet-500/60 transition-all card-tilt spotlight-card" data-category="ai web">
+                    <div class="spotlight-overlay"></div>
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <span class="badge badge-violet-soft">AI • Web</span>
+                        <span class="text-[11px] text-slate-500 flex items-center gap-1"><i class="fas fa-circle text-[6px] text-orange-400"></i> In progress</span>
                     </div>
-                    <h4 class="text-lg font-semibold text-white mb-2">AI-Powered Study Companion</h4>
-                    <p class="text-sm text-slate-300 mb-4">
-                        A web app that helps students revise faster using topic-wise summaries, doubts clarification, and quiz generation powered by AI.
+                    <h4 class="text-lg font-semibold text-white mb-2 relative z-10">AI Study Companion</h4>
+                    <p class="text-sm text-slate-300 mb-4 relative z-10">
+                        A web app that helps students revise faster using topic-wise summaries and AI quizzes.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-[11px] text-slate-400 mb-4">
+                    <div class="flex flex-wrap gap-2 text-[11px] text-slate-400 mb-4 relative z-10">
                         <span class="tag-chip">React</span>
-                        <span class="tag-chip">Tailwind</span>
                         <span class="tag-chip">Python</span>
                     </div>
-                    <div class="flex justify-between items-center text-xs text-slate-400">
-                        <span class="flex items-center gap-2">
-                            <i class="fas fa-code"></i> Personal Project
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <i class="fab fa-github"></i> Soon on GitHub
-                        </span>
+                    <div class="flex justify-between items-center text-xs text-slate-400 relative z-10">
+                        <span class="flex items-center gap-2"><i class="fas fa-code"></i> Personal Project</span>
+                        <span class="flex items-center gap-1 hover:text-orange-400 transition-colors cursor-pointer"><i class="fab fa-github"></i> Code</span>
                     </div>
                 </article>
 
-                <!-- Project card 2 -->
-                <article class="project-card glass rounded-2xl p-6 border border-slate-700/60 hover:border-cyan-500/60 transition-all card-tilt" data-category="web design">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="badge badge-cyan-soft">Web • UI</span>
-                        <span class="text-[11px] text-slate-500 flex items-center gap-1">
-                            <i class="fas fa-circle text-[6px] text-emerald-400"></i> Live
-                        </span>
+                <article class="project-card glass rounded-2xl p-6 border border-slate-700/60 hover:border-orange-500/60 transition-all card-tilt spotlight-card" data-category="web design">
+                    <div class="spotlight-overlay"></div>
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <span class="badge badge-orange-soft">Portfolio</span>
+                        <span class="text-[11px] text-slate-500 flex items-center gap-1"><i class="fas fa-circle text-[6px] text-emerald-400"></i> Live</span>
                     </div>
-                    <h4 class="text-lg font-semibold text-white mb-2">Personal Portfolio v2</h4>
-                    <p class="text-sm text-slate-300 mb-4">
-                        This portfolio itself – built with Tailwind, glassmorphism, custom animations, and AI-first branding for developers & recruiters.
+                    <h4 class="text-lg font-semibold text-white mb-2 relative z-10">Personal Portfolio v2</h4>
+                    <p class="text-sm text-slate-300 mb-4 relative z-10">
+                        Built with Tailwind, Glassmorphism, and Neural Aesthetics.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-[11px] text-slate-400 mb-4">
+                    <div class="flex flex-wrap gap-2 text-[11px] text-slate-400 mb-4 relative z-10">
                         <span class="tag-chip">HTML</span>
                         <span class="tag-chip">Tailwind</span>
-                        <span class="tag-chip">Vanilla JS</span>
+                        <span class="tag-chip">JS</span>
                     </div>
-                    <div class="flex justify-between items-center text-xs text-slate-400">
-                        <span class="flex items-center gap-2">
-                            <i class="fas fa-wand-magic-sparkles"></i> Designed & Coded
-                        </span>
-                        <a href="#" class="flex items-center gap-1 hover:text-white">
-                            <i class="fas fa-external-link-alt text-[11px]"></i> Live
-                        </a>
+                    <div class="flex justify-between items-center text-xs text-slate-400 relative z-10">
+                        <span class="flex items-center gap-2"><i class="fas fa-wand-magic-sparkles"></i> Designed</span>
+                        <a href="#" class="flex items-center gap-1 hover:text-white"><i class="fas fa-external-link-alt text-[11px]"></i> Live</a>
                     </div>
                 </article>
 
-                <!-- Project card 3 -->
-                <article class="project-card glass rounded-2xl p-6 border border-slate-700/60 hover:border-violet-500/60 transition-all card-tilt" data-category="design">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="badge badge-violet-soft">UI / UX</span>
-                        <span class="text-[11px] text-slate-500 flex items-center gap-1">
-                            <i class="fas fa-circle text-[6px] text-emerald-400"></i> Concept
-                        </span>
+                <article class="project-card glass rounded-2xl p-6 border border-slate-700/60 hover:border-pink-500/60 transition-all card-tilt spotlight-card" data-category="design">
+                    <div class="spotlight-overlay"></div>
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <span class="badge badge-pink-soft">UI / UX</span>
+                        <span class="text-[11px] text-slate-500 flex items-center gap-1"><i class="fas fa-circle text-[6px] text-emerald-400"></i> Concept</span>
                     </div>
-                    <h4 class="text-lg font-semibold text-white mb-2">Neon Productivity Dashboard</h4>
-                    <p class="text-sm text-slate-300 mb-4">
-                        A concept UI for a focus dashboard with daily streaks, deep work blocks, session stats, and integrated background music.
+                    <h4 class="text-lg font-semibold text-white mb-2 relative z-10">Neon Dashboard</h4>
+                    <p class="text-sm text-slate-300 mb-4 relative z-10">
+                        A concept UI for a focus dashboard with streaks and deep work blocks.
                     </p>
-                    <div class="flex flex-wrap gap-2 text-[11px] text-slate-400 mb-4">
+                    <div class="flex flex-wrap gap-2 text-[11px] text-slate-400 mb-4 relative z-10">
                         <span class="tag-chip">Figma</span>
-                        <span class="tag-chip">Design System</span>
                         <span class="tag-chip">Neon Theme</span>
                     </div>
-                    <div class="flex justify-between items-center text-xs text-slate-400">
-                        <span class="flex items-center gap-2">
-                            <i class="fas fa-palette"></i> Visual Exploration
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <i class="fas fa-lightbulb"></i> To be developed
-                        </span>
+                    <div class="flex justify-between items-center text-xs text-slate-400 relative z-10">
+                        <span class="flex items-center gap-2"><i class="fas fa-palette"></i> Design</span>
+                        <span class="flex items-center gap-1"><i class="fas fa-lightbulb"></i> Idea</span>
                     </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
     <section id="contact" class="py-20 md:py-24 relative">
         <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-96 bg-violet-600/10 rounded-full blur-[100px] -z-10"></div>
 
         <div class="max-w-4xl mx-auto px-6">
-            <div class="glass rounded-[2.1rem] p-7 md:p-10 border border-white/10 reveal bg-gradient-to-b from-white/5 to-transparent">
+            <div class="glass rounded-[2.1rem] p-7 md:p-10 border border-white/10 reveal bg-gradient-to-b from-white/5 to-transparent shadow-2xl">
                 <div class="text-center mb-10">
-                    <p class="text-xs font-mono text-cyan-400 tracking-[0.25em] uppercase mb-2">Get In Touch</p>
+                    <p class="text-xs font-mono text-orange-400 tracking-[0.25em] uppercase mb-2">Get In Touch</p>
                     <h3 class="text-3xl md:text-4xl font-bold text-white mb-3">Let’s Build Something Smart</h3>
                     <p class="text-slate-400 text-sm md:text-base max-w-xl mx-auto">
-                        Whether it’s an AI experiment, a web product, or a design-heavy interface — I’d love to collaborate.
+                        Whether it’s an AI experiment, a web product, or a design-heavy interface.
                     </p>
                 </div>
                 
-                <div class="flex flex-wrap justify-center gap-3 mb-10 text-sm">
-                    <a href="mailto:abhinavanand9996@gmail.com" class="contact-pill group">
-                        <div class="icon-box bg-fuchsia-500/10 text-fuchsia-400 group-hover:bg-fuchsia-500 group-hover:text-white">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <span>Email Me</span>
-                    </a>
-                    <a href="https://github.com/code-with-ojas" target="_blank" class="contact-pill group">
-                        <div class="icon-box bg-slate-700/30 text-slate-300 group-hover:bg-white group-hover:text-black">
-                            <i class="fab fa-github"></i>
-                        </div>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://www.instagram.com/cse.abhinav?igsh=MTcxdDR6N2VyMmIwMQ==" target="_blank" class="contact-pill group">
-                        <div class="icon-box bg-pink-500/10 text-pink-500 group-hover:bg-pink-600 group-hover:text-white">
-                            <i class="fab fa-instagram"></i>
-                        </div>
-                        <span>Instagram</span>
-                    </a>
-                </div>
-
                 <form id="contactForm" class="space-y-5 max-w-2xl mx-auto">
-                    <input type="hidden" name="_captcha" value="false">
-                    
                     <div class="grid md:grid-cols-2 gap-5">
                         <div class="space-y-2">
-                            <label class="form-label">Name</label>
-                            <input type="text" name="name" id="name" class="form-input" placeholder="Your name" required>
+                            <label class="form-label text-violet-300">Name</label>
+                            <input type="text" name="name" class="form-input focus:border-orange-400" placeholder="Your name" required>
                         </div>
                         <div class="space-y-2">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" id="email" class="form-input" placeholder="you@example.com" required>
+                            <label class="form-label text-violet-300">Email</label>
+                            <input type="email" name="email" class="form-input focus:border-orange-400" placeholder="you@example.com" required>
                         </div>
                     </div>
 
                     <div class="space-y-2">
-                        <label class="form-label">Message</label>
-                        <textarea name="message" id="message" rows="4" class="form-input" placeholder="Tell me about your project or idea..." required></textarea>
+                        <label class="form-label text-violet-300">Message</label>
+                        <textarea name="message" rows="4" class="form-input focus:border-orange-400" placeholder="Tell me about your project or idea..." required></textarea>
                     </div>
 
-                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold text-base md:text-lg shadow-[0_10px_30px_rgba(124,58,237,0.3)] hover:shadow-[0_10px_40px_rgba(124,58,237,0.5)] hover:-translate-y-[2px] transition-all duration-300 relative overflow-hidden">
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-orange-500 to-pink-600 text-white font-semibold text-base md:text-lg shadow-[0_10px_30px_rgba(236,72,153,0.3)] hover:shadow-[0_10px_40px_rgba(249,115,22,0.4)] hover:-translate-y-[2px] transition-all duration-300 relative overflow-hidden group">
                         <span class="relative z-10 flex items-center justify-center gap-2">
-                            <i class="fas fa-paper-plane"></i> Send Message
+                            <i class="fas fa-paper-plane group-hover:translate-x-1 transition-transform"></i> Send Message
                         </span>
                     </button>
-
-                    <p class="text-[11px] text-slate-500 text-center mt-2">
-                        Your message goes directly to my inbox. No spam, no automation.
-                    </p>
                 </form>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="py-8 text-center border-t border-white/5 bg-black">
+    <footer class="py-8 text-center border-t border-white/5 bg-[#0F0518]">
         <p class="text-slate-500 text-xs md:text-sm">
-            © 2025 <span class="text-white font-semibold">Abhinav Anand</span>. Crafted with <i class="fas fa-heart text-red-500 mx-1"></i> & Code.
-        </p>
-        <p class="mt-2 text-[10px] text-slate-600">
-            Built for AI/ML, Web, and Design opportunities.
+            © 2025 <span class="text-white font-semibold">Abhinav Anand</span>. Crafted with <i class="fas fa-heart text-pink-500 mx-1"></i> & AI.
         </p>
     </footer>
 
-    <!-- JS -->
     <script src="script.js"></script>
 </body>
 </html>

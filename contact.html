@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire Me | Abhinav Anand</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'], mono: ['JetBrains Mono', 'monospace'] },
+                    colors: { bg: '#0a0a0a', card: '#171717', border: '#262626', accent: '#ffffff', muted: '#a3a3a3' }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-bg text-white antialiased">
+
+    <div class="fixed inset-0 z-[9999] pointer-events-none opacity-[0.03]" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+    <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-white/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
+
+    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+        <div class="flex items-center gap-1 bg-black/80 backdrop-blur-md border border-white/10 px-2 py-2 rounded-full shadow-2xl">
+            <a href="index.html" class="p-3 rounded-full hover:bg-white/10 transition-colors text-white/70 hover:text-white" title="Home"><i class="fas fa-home"></i></a>
+            <a href="projects.html" class="p-3 rounded-full hover:bg-white/10 transition-colors text-white/70 hover:text-white" title="Work"><i class="fas fa-code"></i></a>
+            <a href="contact.html" class="px-5 py-2.5 rounded-full bg-white text-black font-semibold transition-colors text-sm">Hire Me</a>
+        </div>
+    </nav>
+
+    <main class="max-w-xl mx-auto px-6 py-24 relative z-10 flex flex-col justify-center min-h-[80vh]">
+        <div class="bento-card p-8 md:p-12 text-center relative overflow-hidden animate-enter">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Let's build something smart.</h2>
+            <p class="text-muted mb-8">
+                Looking for a dedicated AI Engineer or Full Stack Developer? I'm available for internships and projects.
+            </p>
+            
+            <form id="contactForm" class="max-w-sm mx-auto space-y-3">
+                <input type="hidden" name="access_key" value="d95cbc2e-a628-4836-b956-a1b038407133">
+                <input type="hidden" name="subject" value="New Inquiry from Portfolio">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                <div class="grid grid-cols-1 gap-3">
+                    <input type="text" name="name" placeholder="Your Name" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-white/40 focus:outline-none transition-colors text-sm">
+                    <input type="email" name="email" placeholder="your@email.com" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-white/40 focus:outline-none transition-colors text-sm">
+                </div>
+                <textarea name="message" rows="4" placeholder="Tell me about your project..." required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-white/40 focus:outline-none transition-colors text-sm resize-none"></textarea>
+                <button type="submit" id="formButton" class="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-gray-200 transition-transform hover:-translate-y-0.5 flex justify-center items-center gap-2">Send Message</button>
+                <p id="formStatus" class="text-xs text-muted mt-3 hidden"></p>
+            </form>
+        </div>
+
+        <footer class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-muted gap-4">
+            <p>© 2025 Abhinav Anand</p>
+            <div class="flex gap-4 text-lg">
+                <a href="https://www.linkedin.com/in/abhinav-anand-865926300" target="_blank" class="hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.instagram.com/cse.abhinav?igsh=MTcxdDR6N2VyMmIwMQ==" target="_blank" class="hover:text-pink-500"><i class="fab fa-instagram"></i></a>
+                <a href="https://github.com/code-with-ojas" target="_blank" class="hover:text-white"><i class="fab fa-github"></i></a>
+            </div>
+        </footer>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hire Me | Abhinav Anand</title>
+    <title>Abhinav Anand | AI Engineer</title>
+    <meta name="description" content="AI/ML Engineer and Full Stack Developer based in India.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -13,7 +14,9 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'], mono: ['JetBrains Mono', 'monospace'] },
-                    colors: { bg: '#0a0a0a', card: '#171717', border: '#262626', accent: '#ffffff', muted: '#a3a3a3' }
+                    colors: { bg: '#0a0a0a', card: '#171717', border: '#262626', accent: '#ffffff', muted: '#a3a3a3' },
+                    animation: { 'scroll': 'scroll 35s linear infinite' },
+                    keyframes: { scroll: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(calc(-100% - 1rem))' } } }
                 }
             }
         }
@@ -26,33 +29,115 @@
 
     <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
         <div class="flex items-center gap-1 bg-black/80 backdrop-blur-md border border-white/10 px-2 py-2 rounded-full shadow-2xl">
-            <a href="index.html" class="p-3 rounded-full hover:bg-white/10 transition-colors text-white/70 hover:text-white" title="Home"><i class="fas fa-home"></i></a>
+            <a href="index.html" class="p-3 rounded-full bg-white text-black transition-colors" title="Home"><i class="fas fa-home"></i></a>
             <a href="projects.html" class="p-3 rounded-full hover:bg-white/10 transition-colors text-white/70 hover:text-white" title="Work"><i class="fas fa-code"></i></a>
-            <a href="contact.html" class="px-5 py-2.5 rounded-full bg-white text-black font-semibold transition-colors text-sm">Hire Me</a>
+            <a href="contact.html" class="px-5 py-2.5 rounded-full hover:bg-white/10 text-white/70 hover:text-white font-semibold transition-colors text-sm">Hire Me</a>
         </div>
     </nav>
 
-    <main class="max-w-2xl mx-auto px-6 py-24 relative z-10 flex flex-col justify-center min-h-[80vh]">
-        <div class="bento-card p-8 md:p-12 text-center relative overflow-hidden animate-enter">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Let's build something smart.</h2>
-            <p class="text-muted mb-8">Looking for a dedicated AI Engineer or Full Stack Developer? I'm available for internships and projects.</p>
-            
-            <form id="contactForm" class="max-w-sm mx-auto space-y-3">
-                <input type="hidden" name="access_key" value="d95cbc2e-a628-4836-b956-a1b038407133">
-                <input type="hidden" name="subject" value="New Inquiry from Portfolio">
-                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-
-                <div class="grid grid-cols-1 gap-3">
-                    <input type="text" name="name" placeholder="Your Name" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-white/40 focus:outline-none transition-colors text-sm">
-                    <input type="email" name="email" placeholder="your@email.com" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-white/40 focus:outline-none transition-colors text-sm">
+    <main class="max-w-7xl mx-auto px-6 py-24 relative z-10">
+        
+        <header class="flex flex-col md:flex-row gap-8 items-start mb-16 animate-enter">
+            <div class="relative group">
+                <div class="w-24 h-24 rounded-full overflow-hidden border border-white/10 group-hover:scale-105 transition-transform duration-500 ring-4 ring-white/5">
+                    <img src="ojas photo.jpeg" alt="Abhinav Anand" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all">
+                </div>
+                <div class="absolute bottom-0 right-0 w-6 h-6 bg-black rounded-full flex items-center justify-center border border-white/10">
+                    <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                </div>
+            </div>
+            <div>
+                <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-4">Abhinav Anand</h1>
+                <p class="text-muted text-lg leading-relaxed max-w-xl">
+                    I am a passionate <span class="text-white font-medium">AI/ML Engineer</span> and <span class="text-white font-medium">Full Stack Developer</span> focused on building intelligent products.
+                </p>
+                <div class="flex gap-4 mt-6">
+                    <a href="contact.html" class="px-6 py-2 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors">Contact Me</a>
+                    <a href="projects.html" class="px-6 py-2 border border-white/20 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">View Projects</a>
                 </div>
                 
-                <textarea name="message" rows="4" placeholder="Tell me about your project..." required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-white/40 focus:outline-none transition-colors text-sm resize-none"></textarea>
-                
-                <button type="submit" id="formButton" class="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-gray-200 transition-transform hover:-translate-y-0.5 flex justify-center items-center gap-2">Send Message</button>
-                <p id="formStatus" class="text-xs text-muted mt-3 hidden"></p>
-            </form>
-        </div>
+                <div class="flex flex-wrap gap-5 mt-8 text-sm font-medium text-muted">
+                    <a href="https://www.linkedin.com/in/abhinav-anand-865926300" target="_blank" class="hover:text-blue-400 transition-colors flex items-center gap-2"><i class="fab fa-linkedin text-lg"></i> LinkedIn</a>
+                    <a href="https://www.instagram.com/cse.abhinav?igsh=MTcxdDR6N2VyMmIwMQ==" target="_blank" class="hover:text-pink-500 transition-colors flex items-center gap-2"><i class="fab fa-instagram text-lg"></i> Instagram</a>
+                    <a href="https://github.com/code-with-ojas" target="_blank" class="hover:text-white transition-colors flex items-center gap-2"><i class="fab fa-github text-lg"></i> GitHub</a>
+                    <a href="mailto:abhinavanand9996@gmail.com" class="hover:text-white transition-colors flex items-center gap-2"><i class="fas fa-envelope text-lg"></i> Email</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
+            <div class="bento-card p-6 flex flex-col justify-between h-full">
+                <div><h3 class="text-xs font-mono text-muted uppercase tracking-wider mb-2">Location</h3><p class="text-xl font-medium text-white flex items-center gap-2">Patna, India 🇮🇳</p></div>
+                <div class="mt-6"><div class="text-xs font-mono text-muted uppercase tracking-wider mb-1">Status</div><div class="flex items-center gap-2 text-sm text-green-400"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span></span>Open to Work</div></div>
+            </div>
+            <div class="bento-card md:col-span-2 p-6 font-mono text-xs md:text-sm overflow-hidden relative">
+                 <div class="absolute top-4 right-4 flex gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-red-500/50"></div><div class="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div><div class="w-2.5 h-2.5 rounded-full bg-green-500/50"></div></div>
+                <div class="text-gray-500 mb-2">// abhinav.ts</div>
+                <div class="text-blue-300">
+                    <span class="text-purple-400">class</span> <span class="text-yellow-200">Abhinav</span> <span class="text-purple-400">extends</span> <span class="text-yellow-200">Engineer</span> {<br>
+                    &nbsp;&nbsp;<span class="text-purple-400">constructor</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">this</span>.role = <span class="text-green-300">"AI/ML Engineer"</span>;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-red-300">this</span>.education = <span class="text-green-300">"B.Tech CSE @ LPU"</span>;<br>
+                    &nbsp;&nbsp;}<br>
+                    }
+                </div>
+            </div>
+            <div class="bento-card md:col-span-3 p-0 overflow-hidden relative h-28 flex items-center">
+                <div class="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-card to-transparent z-10"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-card to-transparent z-10"></div>
+                <div class="flex gap-4 animate-scroll whitespace-nowrap px-4">
+                    <span class="tech-item"><i class="fab fa-python text-yellow-500"></i> Python</span>
+                    <span class="tech-item"><i class="fas fa-database text-slate-400"></i> SQL</span>
+                    <span class="tech-item"><i class="fas fa-brain text-orange-400"></i> TensorFlow</span>
+                    <span class="tech-item"><i class="fas fa-chart-line text-green-400"></i> Matplotlib</span>
+                    <span class="tech-item"><i class="fas fa-chart-area text-indigo-400"></i> Seaborn</span>
+                    <span class="tech-item"><i class="fas fa-cube text-blue-400"></i> NumPy</span>
+                    <span class="tech-item"><i class="fas fa-table text-white"></i> Pandas</span>
+                    <span class="tech-item"><i class="fab fa-react text-blue-400"></i> React</span>
+                    <span class="tech-item"><i class="fas fa-code text-blue-600"></i> C++</span>
+                    <span class="tech-item"><i class="fas fa-wind text-cyan-400"></i> Tailwind</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="certificates" class="mb-20">
+            <h2 class="text-xl font-bold text-white mb-8 flex items-center gap-2"><span class="w-1 h-6 bg-white rounded-full"></span> Certifications & Future</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bento-card group p-0 relative overflow-hidden h-64 block border-border hover:border-yellow-500 transition-colors md:col-span-2">
+                    <img src="https://placehold.co/800x400/171717/333333?text=Python+Certification" alt="Python Cert" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
+                        <h3 class="font-bold text-white text-lg">Python Programming</h3>
+                        <p class="text-xs text-muted mt-1">Advanced Python for Data Science & AI</p>
+                    </div>
+                </div>
+                <div class="bento-card group p-0 relative overflow-hidden h-64 block border-border hover:border-blue-500 transition-colors">
+                    <img src="https://placehold.co/600x400/171717/333333?text=Machine+Learning+Cert" alt="ML Cert" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
+                        <h3 class="font-bold text-white text-lg">Machine Learning</h3>
+                        <p class="text-xs text-muted mt-1">Specialization Course</p>
+                    </div>
+                </div>
+                <div class="bento-card group p-0 relative overflow-hidden h-64 block border-border hover:border-green-500 transition-colors">
+                    <img src="https://placehold.co/600x400/171717/333333?text=SQL+Database+Cert" alt="SQL Cert" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
+                        <h3 class="font-bold text-white text-lg">SQL & Data Science</h3>
+                        <p class="text-xs text-muted mt-1">Database Management</p>
+                    </div>
+                </div>
+                <div class="bento-card group p-0 relative overflow-hidden h-64 block border-border hover:border-orange-500 transition-colors">
+                    <img src="https://placehold.co/600x400/171717/333333?text=Python+Visualization" alt="Data Vis Cert" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500">
+                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
+                        <h3 class="font-bold text-white text-lg">Data Visualization</h3>
+                        <p class="text-xs text-muted mt-1">Matplotlib & Seaborn Mastery</p>
+                    </div>
+                </div>
+                <div class="bento-card p-8 flex flex-col justify-center items-start border-l-4 border-l-purple-500 h-64">
+                    <div class="w-12 h-12 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-400 mb-4 animate-pulse"><i class="fas fa-rocket text-2xl"></i></div>
+                    <h3 class="font-bold text-white text-xl mb-2">Future Focus</h3>
+                    <p class="text-muted text-sm leading-relaxed">Currently exploring <strong>Generative AI</strong> and <strong>LLM Fine-tuning</strong>. My goal is to build scalable AI systems that solve complex real-world problems.</p>
+                </div>
+            </div>
+        </section>
 
         <footer class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-muted gap-4">
             <p>© 2025 Abhinav Anand</p>
